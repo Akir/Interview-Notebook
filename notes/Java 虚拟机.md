@@ -102,7 +102,7 @@ Class 文件中的常量池（编译器生成的各种字面量和符号引用�
 
 ## 直接内存
 
-在 JDK 1.4 中新加入了 NIO 类，它可以使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆里的 DirectByteBuffer 对象作为这块内存的引用进行操作。这样能在一些场景中显著提高性能，因为避免了在 Java 堆和 Native 堆中来回复制数据。
+在 JDK 1.4 中新加入了 NIO 类，它可以使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆里的 DirectByteBuffer 对象作为这块内存的引用进行操作。这样能在一些场景中显著提高性能，因为其避免了在 Java 堆和 Native 堆中来回复制数据。
 
 # 二、垃圾收集
 
@@ -146,7 +146,7 @@ Java 虚拟机使用该算法来判断对象是否可被回收，在 Java 中 GC
 
 ### 3. 引用类型
 
-无论是通过引用计算算法判断对象的引用数量，还是通过可达性分析算法判断对象是否可达，判定对象是否可被回收都与引用有关。
+无论是通过引用计数算法判断对象的引用数量，还是通过可达性分析算法判断对象是否可达，判定对象是否可被回收都与引用有关。
 
 Java 具有四种强度不同的引用类型。
 
@@ -182,49 +182,6 @@ obj = null;  // 使对象只被软引用关联
 Object obj = new Object();
 WeakReference<Object> wf = new WeakReference<Object>(obj);
 obj = null;
-```
-
-WeakHashMap 的 Entry 继承自 WeakReference，主要用来实现缓存。
-
-```java
-private static class Entry<K,V> extends WeakReference<Object> implements Map.Entry<K,V>
-```
-
-Tomcat 中的 ConcurrentCache 就使用了 WeakHashMap 来实现缓存功能。ConcurrentCache 采取的是分代缓存，经常使用的对象放入 eden 中，而不常用的对象放入 longterm。eden 使用 ConcurrentHashMap 实现，longterm 使用 WeakHashMap，保证了不常使用的对象容易被回收。
-
-```java
-public final class ConcurrentCache<K, V> {
-
-    private final int size;
-
-    private final Map<K, V> eden;
-
-    private final Map<K, V> longterm;
-
-    public ConcurrentCache(int size) {
-        this.size = size;
-        this.eden = new ConcurrentHashMap<>(size);
-        this.longterm = new WeakHashMap<>(size);
-    }
-
-    public V get(K k) {
-        V v = this.eden.get(k);
-        if (v == null) {
-            v = this.longterm.get(k);
-            if (v != null)
-                this.eden.put(k, v);
-        }
-        return v;
-    }
-
-    public void put(K k, V v) {
-        if (this.eden.size() >= size) {
-            this.longterm.putAll(this.eden);
-            this.eden.clear();
-        }
-        this.eden.put(k, v);
-    }
-}
 ```
 
 **（四）虚引用** 
@@ -299,7 +256,7 @@ finalize() 类似 C++ 的析构函数，用来做关闭外部资源等工作。�
 一般将 Java 堆分为新生代和老年代。
 
 - 新生代使用：复制算法
-- 老年代使用：标记 - 清理 或者 标记 - 整理 算法
+- 老年代使用：标记 - 清除 或者 标记 - 整理 算法
 
 ## 垃圾收集器
 

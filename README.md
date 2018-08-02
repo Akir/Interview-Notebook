@@ -87,17 +87,17 @@ Leetcode 上数据库题目的解题记录。
 
 参考 Effective Java、Java 编程思想，也有部分内容参考官方文档以及 StackOverflow。
 
-> [Java 虚拟机](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/Java%20虚拟机.md)
+> [Java 容器](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/Java%20容器.md)
 
-参考 深入理解 Java 虚拟机。
+包含容器源码分析。
 
 > [Java 并发](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/Java%20并发.md)
 
 参考 Java 编程思想、深入理解 Java 虚拟机。
 
-> [Java 容器](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/Java%20容器.md)
+> [Java 虚拟机](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/Java%20虚拟机.md)
 
-包含容器源码的分析。
+参考 深入理解 Java 虚拟机。
 
 > [Java I/O](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/Java%20IO.md)
 
@@ -105,13 +105,29 @@ Leetcode 上数据库题目的解题记录。
 
 ## 系统设计 :bulb:
 
-> [一致性](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/一致性.md)
+> [系统设计基础](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/系统设计基础.md)
 
-CAP、BASE、Paxos、Raft
+性能、伸缩性、扩展性、可用性、安全性
 
->[分布式问题分析](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/分布式问题分析.md)
+> [分布式](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/分布式.md)
 
-分布式事务、分布式锁、分布式 Session、负载均衡
+分布式锁、分布式事务、CAP、BASE、Paxos、Raft
+
+> [集群](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/集群.md)
+
+负载均衡、Session 管理
+
+> [攻击技术](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/攻击技术.md)
+
+XSS、CSRF、SQL 注入、DDoS
+
+> [缓存](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/缓存.md)
+
+缓存特征、缓存位置、缓存问题、数据分布、一致性哈希、LRU、CDN
+
+> [消息队列](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/消息队列.md)
+
+消息处理模型、使用场景、可靠性
 
 ## 工具 :hammer:
 
@@ -119,9 +135,17 @@ CAP、BASE、Paxos、Raft
 
 一些 Git 的使用和概念。
 
+> [Docker](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/Docker.md)
+
+Docker 基本原理。
+
 > [正则表达式](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/正则表达式.md)
 
 参考 正则表达式必知必会。
+
+> [构建工具](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/构建工具.md)
+
+构建工具的基本概念、主流构建工具介绍
 
 ## 编码实践 :speak_no_evil:
 
@@ -151,7 +175,9 @@ Google 开源项目的代码风格规范。
 
 笔记内容是笔者一个字一个字打上去的，难免会有一些笔误，如果发现笔误可直接在相应文档进行编辑修改。
 
-欢迎提交对本仓库的改进建议~
+如果想要提交一个仓库现在还没有的全新内容，可以先将相应的文档放到 other 目录下。
+
+欢迎在 Issue 中提交对本仓库的改进建议~
 
 **Authorization**
 
@@ -159,21 +185,21 @@ Google 开源项目的代码风格规范。
 
 转载使用请注明出处，谢谢！
 
-**Uploading**
-
-笔者在本地使用为知笔记软件进行书写，为了方便将本地笔记内容上传到 Github 上，实现了一整套自动化上传方案，包括文本文件的导出、提取图片、Markdown 文档转换、Git 同步。
-
-进行 Markdown 文档转换是因为 Github 使用的 GFM 不支持 MathJax 公式和 TOC 标记，所以需要替换 MathJax 公式为 CodeCogs 的云服务和重新生成 TOC 目录。
-
-这里提供了笔者实现的 GFM 文档转换工具的链接：[GFM-Converter](https://github.com/CyC2018/GFM-Converter)。
-
 **Typesetting**
 
 笔记内容按照 [中文文案排版指北](http://mazhuang.org/wiki/chinese-copywriting-guidelines/) 进行排版，以保证内容的可读性。
 
 笔记不使用 `![]()` 这种方式来引用图片，而是用 `<img>` 标签。一方面是为了能够控制图片以合适的大小显示，另一方面是因为 GFM 不支持 `<center> ![]() </center>` 让图片居中显示，只能使用 `<div align="center"> <img src=""/> </div>` 达到居中的效果。
 
-这里提供了笔者实现的中英混排文档在线排版工具的链接：[Text-Typesetting](https://github.com/CyC2018/Markdown-Typesetting)。
+笔者将自己实现的文档排版功能提取出来，放在 Github Page 中，无需下载安装即可免费使用：[Text-Typesetting](https://github.com/CyC2018/Markdown-Typesetting)。
+
+**Uploading**
+
+笔者在本地使用为知笔记软件进行书写，为了方便将本地笔记内容上传到 Github 上，实现了一整套自动化上传方案，包括文本文件的导出、提取图片、Markdown 文档转换、Git 同步。
+
+进行 Markdown 文档转换是因为 Github 使用的 GFM 不支持 MathJax 公式和 TOC 标记，所以需要替换 MathJax 公式为 CodeCogs 的云服务和重新生成 TOC 目录。
+
+笔者将自己实现文档转换功能提取出来，方便大家在需要将本地 Markdown 上传到 Github，或者制作项目 README 文档时生成目录时使用：[GFM-Converter](https://github.com/CyC2018/GFM-Converter)。
 
 **Statement**
 
